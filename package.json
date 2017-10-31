@@ -23,5 +23,8 @@
   "homepage": "https://github.com/moeabdol/amazon-nodejs#readme",
   "devDependencies": {
     "eslint": "^4.10.0"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
   }
 }
