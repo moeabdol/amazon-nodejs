@@ -1,0 +1,27 @@
+{
+  "name": "amazon-nodejs",
+  "version": "1.0.0",
+  "description": "Amazon clone using NodeJS.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moeabdol/amazon-nodejs.git"
+  },
+  "keywords": [
+    "ecommerce",
+    "amazon",
+    "nodejs"
+  ],
+  "author": "moeabdol",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moeabdol/amazon-nodejs/issues"
+  },
+  "homepage": "https://github.com/moeabdol/amazon-nodejs#readme",
+  "devDependencies": {
+    "eslint": "^4.10.0"
+  }
+}
