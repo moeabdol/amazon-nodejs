@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const exphbs     = require('express-handlebars');
 const path       = require('path');
 
+const mainRoutes = require('./routes/main');
 const userRoutes = require('./routes/users');
 
 const app = express();
@@ -33,15 +34,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Configure routes
+app.use('/', mainRoutes);
 app.use('/users', userRoutes);
-
-app.get('/about', (req, res) => {
-  res.render('about');
-});
-
-app.get('/', (req, res) => {
-  res.render('home');
-});
 
 app.listen(3000, (err) => {
   if (err) throw err;
