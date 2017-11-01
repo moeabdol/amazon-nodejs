@@ -30,6 +30,10 @@ app.use(bodyParser.json());
 // Configure routes
 app.use('/users', userRoutes);
 
+app.get('/about', (req, res) => {
+  res.render('about');
+});
+
 app.get('/', (req, res) => {
   res.render('home');
 });
