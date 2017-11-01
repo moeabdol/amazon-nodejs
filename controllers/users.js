@@ -12,7 +12,7 @@ const create = (req, res, next) => {
       console.log('User created');
       res.send('user created');
     })
-    .catch(err => next (err));
+    .catch(err => next(err));
 };
 
 module.exports = {
