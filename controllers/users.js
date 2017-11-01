@@ -1,6 +1,8 @@
+const passport = require('passport');
+
 const User = require('../models/user');
 
-const add = (req, res) => {
+const signup = (req, res) => {
   res.render('users/signup', {
     name: '',
     email: ''
@@ -42,7 +44,33 @@ const create = (req, res, next) => {
     .catch(err => next(err));
 };
 
+const signin = (req, res) => {
+  if (req.user) {
+    req.flash('success', 'You\'re already signed in');
+    return res.redirect('/');
+  }
+
+  res.render('users/signin');
+};
+
+const enter = passport.authenticate('local', {
+  successRedirect: '/users/profile',
+  successFlash: true,
+  failureRedirect: '/users/signin',
+  failureFlash: true
+});
+
+const profile = (req, res) => {
+  // User.findById(req.user._id)
+  //   .then(user => res.render('users/profile')
+  //   .catch(err => next(err));
+  res.render('users/profile');
+};
+
 module.exports = {
-  add,
-  create
+  signup,
+  create,
+  signin,
+  enter,
+  profile
 };
