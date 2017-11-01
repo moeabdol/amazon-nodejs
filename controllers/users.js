@@ -1,16 +1,25 @@
 const User = require('../models/user');
 
 const create = (req, res, next) => {
-  const user = new User();
+  const newUser = new User();
 
-  user.profile.name = req.body.name;
-  user.email = req.body.email;
-  user.password = req.body.password;
+  newUser.profile.name = req.body.name;
+  newUser.email        = req.body.email;
+  newUser.password     = req.body.password;
 
-  user.save()
-    .then(() => {
-      console.log('User created');
-      res.send('user created');
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if (user) {
+        console.log('email already exists');
+        return res.redirect('/signup');
+      }
+
+      newUser.save()
+        .then(() => {
+          console.log('User created');
+          res.status(201).json('New user has been created');
+        })
+        .catch(err => next(err));
     })
     .catch(err => next(err));
 };
