@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const exphbs     = require('express-handlebars');
 const session    = require('express-session');
 const flash      = require('connect-flash');
+const MongoStore = require('connect-mongo')(session);
+const passport   = require('passport');
 const path       = require('path');
 
 const config     = require('./config/config');
@@ -42,7 +44,8 @@ app.use(bodyParser.json());
 app.use(session({
   secret: config.secret,
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new MongoStore({ url: config.db, autoReconnect: true })
 }));
 
 // Configure connect-flash middleware
