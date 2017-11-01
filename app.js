@@ -60,7 +60,7 @@ app.use((req, res, next) => {
 app.use('/', mainRoutes);
 app.use('/users', userRoutes);
 
-app.listen(3000, (err) => {
+app.listen(config.port, (err) => {
   if (err) throw err;
   console.log('Server started at port 3000');
 });
