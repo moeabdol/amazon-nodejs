@@ -1,5 +1,9 @@
 const User = require('../models/user');
 
+const add = (req, res) => {
+  res.render('users/signup');
+};
+
 const create = (req, res, next) => {
   const newUser = new User();
 
@@ -25,5 +29,6 @@ const create = (req, res, next) => {
 };
 
 module.exports = {
+  add,
   create
 };
