@@ -1,6 +1,6 @@
-const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
+const bcrypt   = require('bcryptjs');
 
-const mongoose = require('../config/mongoose');
 const Schema = mongoose.Schema;
 
 const SALT_FACTOR = 10;
