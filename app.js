@@ -2,6 +2,7 @@ const express    = require('express');
 const morgan     = require('morgan');
 const bodyParser = require('body-parser');
 const exphbs     = require('express-handlebars');
+const path       = require('path');
 
 const userRoutes = require('./routes/users');
 
@@ -12,6 +13,10 @@ app.disable('x-powered-by');
 
 // Connect to database
 require('./config/mongoose');
+
+// Configure static file directories
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'node_modules')));
 
 // Configure handlebars engine
 app.engine('.hbs', exphbs({
