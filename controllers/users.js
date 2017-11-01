@@ -67,10 +67,16 @@ const profile = (req, res) => {
   res.render('users/profile');
 };
 
+const signout = (req, res) => {
+  req.logout();
+  res.redirect('/');
+};
+
 module.exports = {
   signup,
   create,
   signin,
   enter,
-  profile
+  profile,
+  signout
 };

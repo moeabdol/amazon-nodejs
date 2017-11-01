@@ -9,5 +9,6 @@ router.post('/signup', users.create);
 router.get('/signin', users.signin);
 router.post('/signin', users.enter);
 router.get('/profile', users.profile);
+router.get('/signout', users.signout);
 
 module.exports = router;

@@ -43,6 +43,7 @@ app.use(bodyParser.json());
 // Configure express-session middleware
 app.use(session({
   secret: config.secret,
+  name: 'amazon-clone',
   resave: true,
   saveUninitialized: true,
   store: new MongoStore({ url: config.db, autoReconnect: true })
