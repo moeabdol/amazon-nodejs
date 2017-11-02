@@ -11,6 +11,7 @@ const passport   = require('passport');
 const path       = require('path');
 
 const config      = require('./config/config');
+const Category    = require('./models/category');
 const mainRoutes  = require('./routes/main');
 const userRoutes  = require('./routes/users');
 const adminRoutes = require('./routes/admin');
@@ -57,6 +58,16 @@ app.use(flash());
 require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Middleware to select all categories
+app.use((req, res, next) => {
+  Category.find().select('name')
+    .then(categories => {
+      res.locals.categories = categories;
+      next();
+    })
+    .catch(err => next(err));
+});
 
 // Global variables
 app.use((req, res, next) => {
