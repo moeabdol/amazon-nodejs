@@ -77,11 +77,35 @@ const signout = (req, res) => {
   res.redirect('/');
 };
 
+const editProfile = (req, res) => {
+  res.render('users/edit-profile');
+};
+
+const updateProfile = (req, res, next) => {
+  User.findOne({ _id: req.user._id })
+    .then(user => {
+      if (req.body.name) user.profile.name = req.body.name;
+      if (req.body.address || req.body.address === '') {
+        user.address = req.body.address;
+      }
+
+      user.save()
+        .then(() => {
+          req.flash('success', 'User updated successfully');
+          res.redirect('/users/profile');
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+};
+
 module.exports = {
   signup,
   create,
   signin,
   enter,
   profile,
-  signout
+  signout,
+  editProfile,
+  updateProfile
 };
