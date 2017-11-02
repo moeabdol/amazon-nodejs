@@ -1,7 +1,7 @@
 const Category = require('../models/category');
 
 const add = (req, res) => {
-  res.render('admin/add-categories');
+  res.render('admin/add-category', { name: '' });
 };
 
 const create = (req, res, next) => {
@@ -14,10 +14,10 @@ const create = (req, res, next) => {
 
   newCategory.name = req.body.name;
 
-  Category.save()
+  newCategory.save()
     .then(() => {
       req.flash('success', 'Category added successfully');
-      res.redirect('/admin/add-category');
+      res.redirect('/admin/categories/add');
     })
     .catch(err => next(err));
 };
