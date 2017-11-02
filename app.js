@@ -10,9 +10,10 @@ const MongoStore = require('connect-mongo')(session);
 const passport   = require('passport');
 const path       = require('path');
 
-const config     = require('./config/config');
-const mainRoutes = require('./routes/main');
-const userRoutes = require('./routes/users');
+const config      = require('./config/config');
+const mainRoutes  = require('./routes/main');
+const userRoutes  = require('./routes/users');
+const adminRoutes = require('./routes/admin');
 
 const app = express();
 
@@ -69,6 +70,7 @@ app.use((req, res, next) => {
 // Configure routes
 app.use('/', mainRoutes);
 app.use('/users', userRoutes);
+app.use('/admin', adminRoutes);
 
 app.listen(config.port, (err) => {
   if (err) throw err;
