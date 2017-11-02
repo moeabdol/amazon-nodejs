@@ -17,9 +17,10 @@ const create = (req, res, next) => {
   if (!req.body.email) errors.push({ text: 'Email must be provided!' });
   if (!req.body.password) errors.push({ text: 'Password must be provided!' });
 
-  newUser.profile.name = req.body.name;
-  newUser.email        = req.body.email;
-  newUser.password     = req.body.password;
+  newUser.profile.name    = req.body.name;
+  newUser.email           = req.body.email;
+  newUser.password        = req.body.password;
+  newUser.profile.picture = newUser.gravatar();
 
   if (errors.length > 0) return res.render('users/signup', {
     errors: errors,
@@ -35,9 +36,13 @@ const create = (req, res, next) => {
       }
 
       newUser.save()
-        .then(() => {
-          req.flash('success', 'Signed up successfully.');
-          res.redirect('/');
+        .then(user => {
+          req.logIn(user, (err) => {
+            if (err) return next(err);
+
+            req.flash('success', 'Signed up successfully.');
+            res.redirect('/users/profile');
+          });
         })
         .catch(err => next(err));
     })
