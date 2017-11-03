@@ -1,5 +1,23 @@
 const Product = require('../models/product');
 
+// Configure elasticsearch mongodb mapping
+const stream = Product.synchronize();
+let count = 0;
+
+Product.createMapping((err, mapping) => {
+  if (err) {
+    console.log('Error creating mapping');
+    console.log(err);
+  } else {
+    console.log('Mapping created');
+    console.log(mapping);
+  }
+});
+
+stream.on('data', () => count++ );
+stream.on('close', () => console.log(`Indexed ${count} documents`));
+stream.on('error', err => console.log(err));
+
 const home = (req, res) => {
   res.render('main/home');
 };
