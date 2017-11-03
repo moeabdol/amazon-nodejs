@@ -15,8 +15,15 @@ const showProducts = (req, res, next) => {
     .catch(err => next(err));
 };
 
+const showProduct = (req, res, next) => {
+  Product.findById(req.params.id)
+    .then(product => res.render('main/product', { product }))
+    .catch(err => next(err));
+};
+
 module.exports = {
   home,
   about,
-  showProducts
+  showProducts,
+  showProduct
 };
