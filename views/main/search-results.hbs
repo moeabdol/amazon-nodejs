@@ -1,0 +1,21 @@
+<div class="container mt-3">
+    <h3>Results for {{q}}</h3>
+    <div class="row">
+      {{#each data}}
+        <div class="col-md-4">
+          <a href="/product/{{_id}}">
+            <div class="card mb-3">
+              <img class="card-img-top" src="{{_source.image}}" alt="">
+              <div class="card-body">
+                <h4 class="card-title">{{_source.name}}</h4>
+                <p class="card-text">{{_source.category.name}}</p>
+                <p class="card-text">{{_source.price}}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      {{else}}
+      <h3>No search results</h3>
+    </div>
+  {{/each}}
+</div>

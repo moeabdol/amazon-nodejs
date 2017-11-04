@@ -39,9 +39,32 @@ const showProduct = (req, res, next) => {
     .catch(err => next(err));
 };
 
+const search = (req, res) => {
+  res.redirect(`/search?q=${req.body.q}`);
+};
+
+const showSearch = (req, res, next) => {
+  if (req.query.q) {
+    Product.search({
+      query_string: { query: req.query.q }
+    }, (err, results) => {
+      if (err) return next(err);
+
+      const data = results.hits.hits.map(hit => hit);
+
+      res.render('main/search-results', {
+        q: req.query.q,
+        data: data
+      });
+    });
+  }
+};
+
 module.exports = {
   home,
   about,
   showProducts,
-  showProduct
+  showProduct,
+  search,
+  showSearch
 };

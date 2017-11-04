@@ -8,5 +8,7 @@ router.get('/', main.home);
 router.get('/about', main.about);
 router.get('/products/:id', main.showProducts);
 router.get('/product/:id', main.showProduct);
+router.post('/search', main.search);
+router.get('/search', main.showSearch);
 
 module.exports = router;
