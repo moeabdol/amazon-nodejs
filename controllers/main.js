@@ -18,8 +18,35 @@ stream.on('data', () => count++ );
 stream.on('close', () => console.log(`Indexed ${count} documents`));
 stream.on('error', err => console.log(err));
 
-const home = (req, res) => {
-  res.render('main/home');
+const home = (req, res, next) => {
+  if (!req.user) return res.render('main/home');
+
+  paginate(req, res, next);
+};
+
+const paginate = (req, res, next) => {
+  const PER_PAGE = 9;
+  let page = req.params.page--;
+
+  Product.find()
+    .skip(PER_PAGE * page)
+    .limit(PER_PAGE)
+    .populate('category')
+    .then(products => {
+      Product.count()
+        .then(count => res.render('main/product-main', {
+          count,
+          products,
+          pages: count / PER_PAGE,
+          page: page++
+        }))
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+};
+
+const getPage = (req, res, next) => {
+  paginate(req, res, next);
 };
 
 const about = (req, res) => {
@@ -66,5 +93,6 @@ module.exports = {
   showProducts,
   showProduct,
   search,
-  showSearch
+  showSearch,
+  getPage,
 };

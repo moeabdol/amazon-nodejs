@@ -11,6 +11,7 @@ const passport   = require('passport');
 const path       = require('path');
 
 const config      = require('./config/config');
+const hbsHelpers  = require('./helpers/hbs');
 const Category    = require('./models/category');
 const mainRoutes  = require('./routes/main');
 const userRoutes  = require('./routes/users');
@@ -31,7 +32,13 @@ app.use(express.static(path.join(__dirname, 'node_modules')));
 // Configure handlebars engine
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
-  extname: '.hbs'
+  extname: '.hbs',
+  helpers: {
+    times: hbsHelpers.times,
+    forLoop: hbsHelpers.forLoop,
+    ifCond: hbsHelpers.ifCond,
+    add: hbsHelpers.add
+  }
 }));
 app.set('view engine', '.hbs');
 
