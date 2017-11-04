@@ -16,6 +16,7 @@ const Category    = require('./models/category');
 const mainRoutes  = require('./routes/main');
 const userRoutes  = require('./routes/users');
 const adminRoutes = require('./routes/admin');
+const apiRoutes   = require('./api/api');
 
 const app = express();
 
@@ -89,6 +90,7 @@ app.use((req, res, next) => {
 app.use('/', mainRoutes);
 app.use('/users', userRoutes);
 app.use('/admin', adminRoutes);
+app.use('/api', apiRoutes);
 
 app.listen(config.port, (err) => {
   if (err) throw err;
