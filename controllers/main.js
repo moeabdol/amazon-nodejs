@@ -113,6 +113,22 @@ const showCart = (req, res, next) => {
     .catch(err => next(err));
 };
 
+const removeProductFromCart = (req, res, next) => {
+  Cart.findOne({ owner: req.user._id })
+    .then(foundCart => {
+      foundCart.items = foundCart.items.filter(el => el.item != req.body.item);
+      foundCart.total = (foundCart.total - parseFloat(req.body.price).toFixed(2));
+
+      foundCart.save()
+        .then(() => {
+          req.flash('success', 'Successfully removed');
+          res.redirect('/cart');
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+};
+
 module.exports = {
   home,
   about,
@@ -122,5 +138,6 @@ module.exports = {
   showSearch,
   getPage,
   addProductToCart,
-  showCart
+  showCart,
+  removeProductFromCart
 };

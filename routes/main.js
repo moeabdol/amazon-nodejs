@@ -13,5 +13,6 @@ router.get('/search', main.showSearch);
 router.get('/page/:page', main.getPage);
 router.post('/product/:id', main.addProductToCart);
 router.get('/cart', main.showCart);
+router.post('/remove', main.removeProductFromCart);
 
 module.exports = router;
