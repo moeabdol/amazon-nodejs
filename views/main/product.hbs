@@ -21,10 +21,10 @@
 
         <div class="form-group">
           <input type="hidden" name="productId" id="quantity" value="{{product._id}}">
-          <input type="hidden" name="priceHidden" id="price" value="{{product.price}}">
+          <input type="hidden" name="priceHidden" id="priceHidden" value="{{product.price}}">
 
           <input type="text" name="item" class="form-control mb-2" value="{{product.name}}">
-          <input type="text" name="price" class="form-control" value="{{product.price}}">
+          <input type="text" name="price" id="price" class="form-control" value="{{product.price}}">
         </div>
 
         {{#if user}}
