@@ -12,5 +12,6 @@ router.post('/search', main.search);
 router.get('/search', main.showSearch);
 router.get('/page/:page', main.getPage);
 router.post('/product/:id', main.addProductToCart);
+router.get('/cart', main.showCart);
 
 module.exports = router;

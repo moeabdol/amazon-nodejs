@@ -106,6 +106,13 @@ const addProductToCart = (req, res, next) => {
     .catch(err => next(err));
 };
 
+const showCart = (req, res, next) => {
+  Cart.findOne({ owner: req.user._id })
+    .populate('items.item')
+    .then(cart => res.render('main/cart', { cart }))
+    .catch(err => next(err));
+};
+
 module.exports = {
   home,
   about,
@@ -114,5 +121,6 @@ module.exports = {
   search,
   showSearch,
   getPage,
-  addProductToCart
+  addProductToCart,
+  showCart
 };
