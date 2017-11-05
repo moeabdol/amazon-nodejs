@@ -7,6 +7,32 @@
     <div class="col-lg-4">
       <h3>{{product.name}}</h3>
       <h1>{{product.price}}</h1>
+
+      <form method="POST" action="">
+        <input type="hidden" name="quantity" id="quantity" value="1">
+
+        <div class="form-group">
+          <div class="btn-group" role="group" aria-label="...">
+            <button type="button" id="minus" class="btn btn-outline-secondary">-</button>
+            <button type="button" id="total" class="btn btn-outline-secondary">1</button>
+            <button type="button" id="plus" class="btn btn-outline-secondary">+</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="hidden" name="productId" id="quantity" value="{{product._id}}">
+          <input type="hidden" name="priceHidden" id="price" value="{{product.price}}">
+
+          <input type="text" name="item" class="form-control mb-2" value="{{product.name}}">
+          <input type="text" name="price" class="form-control" value="{{product.price}}">
+        </div>
+
+        {{#if user}}
+          <button type="submit" class="btn btn-primary btn-lg">Add to Cart</button>
+        {{else}}
+          <a href="/signup" class="btn btn-warning btn-lg">Sign Up to Begin Buying</a>
+        {{/if}}
+      </form>
     </div>
   </div>
 </div>
