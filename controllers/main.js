@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const Cart    = require('../models/cart');
 
 // Configure elasticsearch mongodb mapping
 const stream = Product.synchronize();
@@ -87,6 +88,24 @@ const showSearch = (req, res, next) => {
   }
 };
 
+const addProductToCart = (req, res, next) => {
+  Cart.findOne({ owner: req.user._id })
+    .then(cart => {
+      cart.items.push({
+        item: req.body.productId,
+        price: parseFloat(req.body.price),
+        quantity: parseInt(req.body.quantity)
+      });
+
+      cart.total = (cart.total + parseFloat(req.body.price)).toFixed(2);
+
+      cart.save()
+        .then(() => res.redirect('/cart'))
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+};
+
 module.exports = {
   home,
   about,
@@ -95,4 +114,5 @@ module.exports = {
   search,
   showSearch,
   getPage,
+  addProductToCart
 };
