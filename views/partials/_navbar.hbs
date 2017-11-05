@@ -44,6 +44,17 @@
           <a class="nav-link" href="/users/signin">Signin</a>
         </li>
       {{/if}}
+
+      <li class="nav-item">
+        <a class="nav-link" href="/cart">
+          <i class="fa fa-shopping-cart fa-lg"></i>
+          {{#if user}}
+            <span class="badge badge-pill badge-secondary">{{cart}}</span>
+          {{else}}
+            <span class="badge badge-pill badge-light">0</span>
+          {{/if}}
+        </a>
+      </li>
     </ul>
   </div>
 </nav>

@@ -17,6 +17,7 @@ const mainRoutes  = require('./routes/main');
 const userRoutes  = require('./routes/users');
 const adminRoutes = require('./routes/admin');
 const apiRoutes   = require('./api/api');
+const middlewares = require('./middlewares/middlewares');
 
 const app = express();
 
@@ -85,6 +86,9 @@ app.use((req, res, next) => {
 
   next();
 });
+
+// Use custom middlewares
+app.use(middlewares.cartMiddleware);
 
 // Configure routes
 app.use('/', mainRoutes);
