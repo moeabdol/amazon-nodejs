@@ -1,4 +1,6 @@
 body {
   padding-top: 3.5rem; }
+  body .product-image {
+    width: 100%; }
 
 /*# sourceMappingURL=styles.css.map */

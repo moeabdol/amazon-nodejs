@@ -109,7 +109,7 @@ const addProductToCart = (req, res, next) => {
 const showCart = (req, res, next) => {
   Cart.findOne({ owner: req.user._id })
     .populate('items.item')
-    .then(cart => res.render('main/cart', { cart }))
+    .then(foundCart => res.render('main/cart', { foundCart }))
     .catch(err => next(err));
 };
 

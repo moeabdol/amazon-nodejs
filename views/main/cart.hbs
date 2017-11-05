@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+    {{#each foundCart.items}}
+      <div class="list-group my-3">
+        <span class="list-group-item">
+          <div class="row">
+            <div class="col-md-3">
+              <span><img class="product-image" src="{{item.image}}" alt=""></span>
+            </div>
+
+            <div class="col-md-6">
+              <h5>{{item.name}}</h5>
+            </div>
+
+            <div class="col-md-3">
+              <p>{{quantity}}</p>
+              <p>{{price}}</p>
+            </div>
+          </div>
+        </span>
+      </div>
+    {{/each}}
+    </div>
+
+    <div class="col-lg-3">
+    </div>
+
+    <div class="col-lg-3">
+    </div>
+  </div>
+</div>
